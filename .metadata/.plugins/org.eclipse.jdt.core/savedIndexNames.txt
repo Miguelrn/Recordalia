@@ -1,0 +1,4 @@
+INDEX VERSION 1.127+C:\hlocal\padfdi\.metadata\.plugins\org.eclipse.jdt.core
+3423939273.index
+3515282563.index
+768421125.index

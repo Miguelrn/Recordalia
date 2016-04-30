@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.myfirstapp.MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/aniadir_lugar"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/Aniadir_lugar"
+        android:icon="@mipmap/ic_action_new"
+        app:showAsAction="ifRoom"/>
+    
+    <item
+        android:id="@+id/opciones"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/opciones"
+        android:icon="@mipmap/settings"
+        app:showAsAction="ifRoom"/>
+    
+
+
+
+</menu>

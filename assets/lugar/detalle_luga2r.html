@@ -1,0 +1,169 @@
+<html>
+	<head>
+	 <title>Ficha</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+	 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+	 <link href='http://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
+	</head>
+
+<style>
+
+body{
+	margin:0 auto!important;
+	width:100%;
+	font-family: 'Coming Soon', cursive;
+}
+#map-canvas{
+  height: 100%;
+  width: 100%;  
+ 
+}
+
+#centro{      
+	margin: 0 auto;
+    width:77%;   
+    height:400px;
+	border:1px solid #ccc;
+}
+
+.invisible{
+	display:none;
+}
+
+.gradiante{
+	background: -moz-linear-gradient(#D3D8E8,white) no-repeat!important;
+	background: -webkit-linear-gradient(#D3D8E8,white) no-repeat!important;
+	background: -o-linear-gradient(#D3D8E8,white) no-repeat!important;
+	background: linear-gradient(#D3D8E8,white)no-repeat !important ;   
+	margin: 0 auto;
+	width:90%;
+	text-align:center;
+	border:8px groove lightblue;
+	
+}
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+<script>
+
+
+$( document ).ready(function() {
+// Gestion de Parametros GET
+	var url = document.URL;
+	var variables = url.split('?');
+	if (variables.length > 1){
+		var ar_variables = variables[1].split('&');
+	}
+	//Recorremos cada elemento del array y lo dividimos en pares de clave/valor
+	$.each( ar_variables, function( key, value ) {
+		var clave = value.split('=');
+		//Caso general
+		 $('#'+clave[0]).text(decodeURI(clave[1]));
+		 $('#tr_'+clave[0]).toggle('slow');
+		 
+		 //Casos especiales
+		 if(clave[0]=="direccion"){
+			$('#tr_mapa').toggle('slow');
+		 }
+		 
+		 if(clave[0]=="telefono"){
+			 $('#telefono').attr("href", "tel:"+decodeURI(clave[1]));
+			  $('#url').attr('target','_blank');
+		 }
+		  if(clave[0]=="url"){
+			 $('#url').attr("href", "http://"+decodeURI(clave[1]));
+			 $('#url').attr('target','_blank');
+		 }
+		 if(clave[0]=="valoracion"){
+		 
+			var estrellas="";
+			for (var i = 0; i < clave[1]; i++) { 
+			 estrellas = estrellas + "<img src='star.png' style='width:4%'>";
+			}
+			 $('#valoracion').html(estrellas);
+		 }
+		 
+	});
+	
+	
+});	
+	
+//Servicio de la API de Google Maps
+var map;
+
+function initialize() {
+  var mapOptions = {
+    zoom: 16
+  };
+  
+  geocoder = new google.maps.Geocoder();
+    
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+var address = $('#direccion').text();
+  
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+	
+  });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+	<body>
+	<div class="gradiante">
+		<table data-role="table" class="ui-responsive">
+		  <thead>
+			<tr>     
+			  <th data-priority="1"></th>
+			  <th data-priority="2"></th>      
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr id="tr_nombre" class="invisible">
+			  <td><b>Nombre: </b><span id="nombre"></span></td>  
+			</tr>
+			  <tr id="tr_tipo" class="invisible">
+			  <td><b>Tipo: </b><span id="tipo"></span></td>  
+				
+			</tr>
+			  <tr id="tr_direccion" class="invisible">
+			  <td><b>Direcci&oacute;n: </b><span id="direccion"></span></td>  
+			   
+			</tr>
+			  <tr id="tr_telefono" class="invisible">
+			  <td><b>Tel&eacute;fono: </b><a id="telefono"></a></td>  
+				
+			</tr>
+			  <tr id="tr_url" class="invisible">
+			  <td><b>URL: </b><a id="url"></a></td>  
+				 
+			</tr>
+			 <tr id="tr_mapa" class="invisible">
+			  <td>   <b>Ubicaci&oacute;n:</b>           
+					<div id="centro"><div id="map-canvas"></div>  </div></td> 		   
+			</tr>
+			  <tr id="tr_valoracion" class="invisible">
+			  <td><b>Valoraci&oacute;n: </b><span id="valoracion"></span></td>  
+				   
+			</tr>
+			  <tr id="tr_comentario" class="invisible">
+			  <td><b>Comentarios: </b><span id="comentario"></span></td>  
+				   
+			</tr>
+		  </tbody>
+		</table>
+				
+	</div>
+	</body>
+</html>

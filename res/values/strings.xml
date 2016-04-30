@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Recordalia</string>
+    <string name="title_lugar_detail">Detalles del sitio</string>
+    <string name="Aniadir_lugar">Añadir_lugar</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="Enviar">Enviar</string>
+    <string name="Borrar">Borrar</string>
+    <string name="NombreDelLugar">Nombre del lugar</string>
+    <string name="Direccion">Dirección del lugar</string>
+    <string name="Telefono">Telefono de contacto</string>
+    <string name="Comentarios">Comentarios</string>
+    <string name="Puntuacion">Puntuación</string>
+    <string name="Url">Url del sitio</string>
+    <string name="saved_ordenado_por">com.example.padfdi.ordenado_por</string>
+    <string name="saved_ordenacion">com.example.padfdi.ordenacion</string>
+    <string name="preference_file_key">com.example.padfdi.PREFERENCE_FILE_KEY</string>
+    <string name="NuevoLugar">Registro</string>
+    <string name="opciones">Opciones</string>
+    <string name="modificar">Modificar</string>
+    <string name="valoresDefecto">Reset</string>
+    <string name="FechaPublicacion">Fecha</string>
+    <string name="Nota">Valoración</string>
+    <string name="NombreLugar">Nombre del lugar</string>
+    <string name="Ascendente">Ascendente</string>
+    <string name="Descendente">Descendente</string>
+    <string name="MenuOpciones">Menú Opciones</string>
+    <string name="tipoEstablecimiento">Tipo de establecimiento</string>
+
+
+    <string-array name="TiposDeEstablecimientos">
+        <item>Seleccione un tipo</item>
+        <item>Restaurante</item>
+        <item>Bar</item>
+        <item>Copas</item>
+        <item>Espectaculo</item>
+        <item>Hotel</item>
+        <item>Compras</item>
+    </string-array>
+
+</resources>

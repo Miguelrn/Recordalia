@@ -1,0 +1,181 @@
+<html>
+	<head>
+	 <title>Ficha</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+	 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+	 <link href='http://fonts.googleapis.com/css?family=Coming+Soon' rel='stylesheet' type='text/css'>
+	</head>
+
+<style>
+
+body{
+	margin:0 auto!important;
+	width:100%;
+	font-family: 'Coming Soon', cursive;
+}
+#map-canvas{
+  height: 100%;
+  width: 100%;  
+ 
+}
+
+#centro{      
+	margin: 0 auto;
+    width:77%;   
+    height:400px;
+	border:1px solid #ccc;
+}
+
+.invisible{
+	display:none;
+}
+
+.gradiante{
+	background: -moz-linear-gradient(#D3D8E8,white) no-repeat!important;
+	background: -webkit-linear-gradient(#D3D8E8,white) no-repeat!important;
+	background: -o-linear-gradient(#D3D8E8,white) no-repeat!important;
+	background: linear-gradient(#D3D8E8,white)no-repeat !important ;   
+	margin: 0 auto;
+	width:90%;
+	text-align:center;
+	border:8px groove lightblue;
+	
+}
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+<script>
+
+	function mostrar(){
+        var nombre = Android.getNombre();
+		if(nombre !=""){
+			$('#nombre').text(nombre);
+			$('#tr_nombre').toggle('slow');
+		}
+		
+		var tipo = Android.getTipo();
+		if(tipo !=""){
+			$('#tipo').text(tipo);
+			$('#tr_tipo').toggle('slow');
+		}
+		
+		var direccion = Android.getDireccion();
+		if(direccion !=""){
+			$('#direccion').text(direccion);
+			$('#tr_direccion').toggle('slow');
+			$('#tr_mapa').toggle('slow');
+		}
+		
+		var telefono = Android.getTelefono();	
+		if(telefono !=""){			
+			var a_telefono = "<a href='tel:"+telefono+"' target='_blank'>"+telefono+"</a>";
+			 $('#telefono').html(a_telefono);
+			$('#tr_telefono').toggle('slow');
+		}
+		
+		var url = Android.getUrl();
+		if(url !=""){	
+			var a_url = "<a href='http://"+url+"' target='_blank'>"+url+"</a>";
+			 $('#url').html(a_url);
+			$('#tr_url').toggle('slow');
+		}
+		var valoracion = Android.getValoracion();	
+		if(valoracion !=""){		
+			var estrellas="";
+				for (var i = 0; i < valoracion; i++) { 
+				 estrellas = estrellas + "<img src='star.png' style='width:4%'>";
+				}
+				 $('#valoracion').html(estrellas);
+			$('#tr_valoracion').toggle('slow');
+		}
+		var comentario = Android.getComentario();
+		if(comentario !=""){
+			$('#comentario').text(comentario);
+			$('#tr_comentario').toggle('slow');
+		}
+		 
+    }
+	
+	
+//});	
+	
+//Servicio de la API de Google Maps
+var map;
+
+function initialize() {
+  var mapOptions = {
+    zoom: 16
+  };
+  
+  geocoder = new google.maps.Geocoder();
+    
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+var address = $('#direccion').text();
+  
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+	
+  });
+}
+google.maps.event.addDomListener(window, 'load', mostrar);
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+	<body>
+	<div class="gradiante">	
+		<table data-role="table" class="ui-responsive">
+		  <thead>
+			<tr>     
+			  <th data-priority="1"></th>
+			  <th data-priority="2"></th>      
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr id="tr_nombre" class="invisible">
+			  <td><b>Nombre: </b><span id="nombre"></span></td>  
+			</tr>
+			  <tr id="tr_tipo" class="invisible">
+			  <td><b>Tipo: </b><span id="tipo"></span></td>  
+				
+			</tr>
+			  <tr id="tr_direccion" class="invisible">
+			  <td><b>Direcci&oacute;n: </b><span id="direccion"></span></td>  
+			   
+			</tr>
+			  <tr id="tr_telefono" class="invisible">
+			  <td><b>Tel&eacute;fono: </b><span id="telefono"></span></td>  
+				
+			</tr>
+			  <tr id="tr_url" class="invisible">
+			  <td><b>URL: </b><span id="url"></span></td>  
+				 
+			</tr>
+			 <tr id="tr_mapa" class="invisible">
+			  <td>   <b>Ubicaci&oacute;n:</b>           
+					<div id="centro"><div id="map-canvas"></div>  </div></td> 		   
+			</tr>
+			  <tr id="tr_valoracion" class="invisible">
+			  <td><b>Valoraci&oacute;n: </b><span id="valoracion"></span></td>  
+				   
+			</tr>
+			  <tr id="tr_comentario" class="invisible">
+			  <td><b>Comentarios: </b><span id="comentario"></span></td>  
+				   
+			</tr>
+		  </tbody>
+		</table>
+				
+	</div>
+	</body>
+</html>

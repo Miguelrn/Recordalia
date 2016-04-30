@@ -1,0 +1,82 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/lugar_detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical" >
+
+
+        <EditText
+            android:id="@+id/NombreLugar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/NombreDelLugar"/>
+
+        <EditText
+            android:id="@+id/DireccionLugar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Direccion"/>
+
+        <EditText
+            android:id="@+id/TelefonoContacto"
+            android:layout_width="fill_parent"
+            android:inputType="phone"
+            android:digits="0123456789+"
+            android:layout_height="wrap_content"
+            android:hint="@string/Telefono"/>
+
+        <EditText
+            android:id="@+id/UrlSitio"
+            android:layout_width="fill_parent"
+            android:inputType="textWebEmailAddress"
+            android:layout_height="wrap_content"
+            android:hint="@string/Url"/>
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Puntuacion" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TipoEstablecimiento"
+            android:hint="@string/tipoEstablecimiento" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Comentarios"
+            android:id="@+id/Comentarios" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/aceptar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/Enviar"
+                android:onClick="mandarBD" />
+
+
+            <Button
+                android:id="@+id/cancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/Borrar"
+                android:onClick="borrarFormulario" />
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
